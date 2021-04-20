@@ -1,4 +1,4 @@
-const {} = require("./db");
+const { signPetition } = require("./db");
 
 // Require express
 const express = require("express");
@@ -9,6 +9,20 @@ const hb = require("express-handlebars");
 app.engine("handlebars", hb());
 app.set("view engine", "handlebars");
 
+// Require cookie-parser
+const cp = require("cookie-parser");
+app.use(cp());
+
+// app.use(function checkCookies(req, res, next) {
+//     if (req.cookies.cookiesAccepted === undefined)
+// })
+
+app.use(
+    express.urlencoded({
+        extended: false,
+    })
+);
+
 // Serve static files from public folder
 app.use(express.static("public"));
 
@@ -16,6 +30,26 @@ app.get("/petition", (req, res) => {
     res.render("petition", {
         layout: "main",
     });
+});
+
+app.post("/petition", (req, res) => {
+    console.log(req.body);
+    const {
+        "first-name": firstName,
+        "last-name": lastName,
+        signature,
+    } = req.body;
+    signPetition(firstName, lastName, signature)
+        .then(() => {
+            res.cookie("signedPetition", "true");
+            res.redirect("/thanks");
+        })
+        .catch(() => {
+            res.render("petition", {
+                layout: "main",
+                error: true,
+            });
+        });
 });
 
 app.listen(8080, () => console.log("Server listening on port 8080"));
