@@ -13,10 +13,6 @@ app.set("view engine", "handlebars");
 const cp = require("cookie-parser");
 app.use(cp());
 
-// app.use(function checkCookies(req, res, next) {
-//     if (req.cookies.cookiesAccepted === undefined)
-// })
-
 app.use(
     express.urlencoded({
         extended: false,
@@ -27,13 +23,15 @@ app.use(
 app.use(express.static("public"));
 
 app.get("/petition", (req, res) => {
+    if (req.cookies.signedPetition) {
+        return res.redirect("/thanks");
+    }
     res.render("petition", {
         layout: "main",
     });
 });
 
 app.post("/petition", (req, res) => {
-    console.log(req.body);
     const {
         "first-name": firstName,
         "last-name": lastName,
