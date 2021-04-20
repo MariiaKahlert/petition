@@ -50,4 +50,13 @@ app.post("/petition", (req, res) => {
         });
 });
 
+app.get("/thanks", (req, res) => {
+    if (!req.cookies.signedPetition) {
+        return res.redirect("/petition");
+    }
+    res.render("thanks", {
+        layout: "main",
+    });
+});
+
 app.listen(8080, () => console.log("Server listening on port 8080"));
