@@ -1,4 +1,4 @@
-const { signPetition } = require("./db");
+const { signPetition, getFirstAndLastNames } = require("./db");
 
 // Require express
 const express = require("express");
@@ -57,6 +57,20 @@ app.get("/thanks", (req, res) => {
     res.render("thanks", {
         layout: "main",
     });
+});
+
+app.get("/signers", (req, res) => {
+    if (!req.cookies.signedPetition) {
+        return res.redirect("/petition");
+    }
+    getFirstAndLastNames()
+        .then((result) => {
+            res.render("signers", {
+                layout: "main",
+                signers: result.rows,
+            });
+        })
+        .catch();
 });
 
 app.listen(8080, () => console.log("Server listening on port 8080"));

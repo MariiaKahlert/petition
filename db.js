@@ -10,3 +10,11 @@ module.exports.signPetition = (firstName, lastName, signature) => {
         [firstName, lastName, signature]
     );
 };
+
+module.exports.getFirstAndLastNames = () => {
+    return db.query(
+        `
+            SELECT first_name, last_name FROM signatures
+        `
+    );
+};
