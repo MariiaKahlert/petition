@@ -1,6 +1,7 @@
 const canvas = $("canvas");
 const ctx = canvas.get(0).getContext("2d");
 const canvasHtml = canvas.get(0);
+const signature = $("#signature");
 let isDrawing;
 
 canvas.mousedown((e) => {
@@ -24,7 +25,8 @@ canvas.mousemove((e) => {
     }
 });
 
-canvas.mouseup(() => {
+canvas.mouseup((e) => {
     isDrawing = false;
     ctx.closePath();
+    signature.val(e.target.toDataURL());
 });
