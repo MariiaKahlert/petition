@@ -52,6 +52,5 @@ button:focus {
 }
 
 canvas {
-    border: 1px black dotted;
-    height: 50px;
+    border: 1px dotted;
 }
