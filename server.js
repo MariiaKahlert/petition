@@ -1,4 +1,5 @@
 const { signPetition, getFirstAndLastNames } = require("./db");
+const { "cookie-secret": cookieSecret } = require("./secrets.json");
 
 // Require express
 const express = require("express");
@@ -10,8 +11,17 @@ app.engine("handlebars", hb());
 app.set("view engine", "handlebars");
 
 // Require cookie-parser
-const cp = require("cookie-parser");
-app.use(cp());
+// const cp = require("cookie-parser");
+// app.use(cp());
+
+// Require cookie-session
+const cookieSession = require("cookie-session");
+app.use(
+    cookieSession({
+        secret: cookieSecret,
+        maxAge: 1000 * 60 * 60 * 24 * 14,
+    })
+);
 
 app.use(
     express.urlencoded({
