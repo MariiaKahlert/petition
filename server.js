@@ -45,6 +45,13 @@ app.use(express.static("public"));
 
 // REQUESTS
 
+// Register
+app.get("/register", (req, res) => {
+    res.render("register", {
+        layout: "main",
+    });
+});
+
 app.get("/petition", (req, res) => {
     if (req.session.signatureId) {
         return res.redirect("/thanks");

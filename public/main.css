@@ -1,5 +1,9 @@
 * {
     box-sizing: border-box;
+}
+
+body {
+    margin: 0;
     background-color: #a44a3f;
     color: #f6f4d2;
     font-family: "Barlow Condensed", sans-serif;
@@ -43,20 +47,22 @@
     margin-bottom: 10px;
 }
 
-.input-container label {
+label {
     margin-bottom: 5px;
     font-size: 20px;
 }
 
-.input-container input {
+input {
     height: 25px;
     border: 1px solid;
     border-radius: 5px;
     padding: 15px;
     font-size: 15px;
+    background-color: #a44a3f;
+    color: #f6f4d2;
 }
 
-.input-container input:focus {
+input:focus {
     outline: none;
 }
 
@@ -108,4 +114,75 @@ canvas {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* register.handlebars styles */
+
+.main-register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f6f4d2;
+}
+
+.card-container {
+    width: 90vw;
+    height: 80vh;
+    display: flex;
+    background-color: #a44a3f;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 35%);
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.img-container {
+    width: 40%;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.register-container {
+    width: 60%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-container form {
+    width: 70%;
+    max-width: 300px;
+    margin-top: 20px;
+}
+
+.register-container h1 {
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+.register-container h2 {
+    text-transform: uppercase;
+}
+
+.register-container p {
+    width: 70%;
+    max-width: 300px;
+    margin-top: 0;
+    text-align: center;
+}
+
+.register-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
 }
