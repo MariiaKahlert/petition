@@ -5,6 +5,8 @@
     font-family: "Barlow", sans-serif;
 }
 
+/* petition.handlebars styles */
+
 .petition-container {
     height: 100vh;
     display: flex;
@@ -63,7 +65,7 @@ canvas {
     border: 1px dotted;
 }
 
-/* thanks.handlebbars styles */
+/* thanks.handlebars styles */
 
 .thanks-container {
     height: 100vh;
