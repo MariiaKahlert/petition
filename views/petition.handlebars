@@ -1,18 +1,18 @@
-<div class="main-petition-container">
-    <div class="petition-container"> 
+<div class="flex justify-center">
+    <div class="flex flex-column align-center petition-container"> 
         <h1>Sign my petition</h1>
         <h2>to oblige medical trials to disaggregate their data by sex and to include at least 50% of female participants thereby starting solving the problem of the default male norm.</h2>
         <form method="POST" autocomplete="off">
-            <div class="form-container">
+            <div class="flex flex-column align-center justify-evenly petition-form-container">
                 {{#if error}}
                     <p><em>Something went wrong. Please, try again.</em></p>
                 {{/if}}
                 <div class="inputs">
-                    <div class="input-container">
+                    <div class="flex flex-column input-container">
                         <label for="first-name">First name</label>
                         <input type="text" name="first-name" id="first-name" required>
                     </div>
-                    <div class="input-container">
+                    <div class="flex flex-column input-container">
                         <label for="last-name">Last name</label>
                         <input type="text" name="last-name" id="last-name" required>
                     </div>

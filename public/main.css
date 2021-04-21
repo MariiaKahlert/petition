@@ -4,47 +4,15 @@
 
 body {
     margin: 0;
-    background-color: #a44a3f;
-    color: #f6f4d2;
+    /* background-color: #a44a3f; */
+    /* color: #f6f4d2; */
     font-family: "Barlow Condensed", sans-serif;
 }
 
-/* petition.handlebars styles */
-
-.main-petition-container {
-    display: flex;
-    justify-content: center;
-}
-
-.petition-container {
-    height: 100vh;
-    width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.petition-container h2 {
-    text-align: center;
-}
-
-.form-container {
-    width: 500px;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.inputs {
-    width: 80%;
-}
-
-.input-container {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+a,
+a:active,
+a:visited {
+    color: #f6f4d2;
 }
 
 label {
@@ -86,6 +54,70 @@ button:hover {
     opacity: 0.75;
 }
 
+/* Colors */
+
+.bg-carmine {
+    background-color: #a44a3f;
+}
+
+.bg-goldenrod {
+    background-color: #f6f4d2;
+}
+
+.text-carmine {
+    color: #a44a3f;
+}
+
+.text-goldenrod {
+    color: #f6f4d2;
+}
+
+/* Flexbox properties */
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-evenly {
+    justify-content: space-evenly;
+}
+
+/* petition.handlebars styles */
+
+.petition-container {
+    height: 100vh;
+    width: 500px;
+}
+
+.petition-container h2 {
+    text-align: center;
+}
+
+.petition-form-container {
+    width: 500px;
+    height: 500px;
+}
+
+.inputs {
+    width: 80%;
+}
+
+.input-container {
+    margin-bottom: 10px;
+}
+
 .canvas-container p {
     font-size: 20px;
 }
@@ -98,10 +130,6 @@ canvas {
 
 .thanks-container {
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
 }
 
 .signature-container {
@@ -110,35 +138,18 @@ canvas {
     border-radius: 5px;
 }
 
-.thanks-message-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 /* register.handlebars styles */
 
-.main-register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.main-register-login-container {
     height: 100vh;
-    background-color: #f6f4d2;
 }
 
 .card-container {
     width: 90vw;
     height: 80vh;
-    display: flex;
-    background-color: #a44a3f;
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 4px 12px 0 rgb(0 0 0 / 35%);
-}
-
-.register-form {
-    display: flex;
-    flex-direction: column;
 }
 
 .img-container {
@@ -151,30 +162,27 @@ canvas {
     object-fit: cover;
 }
 
-.register-container {
+.register-login-container {
     width: 60%;
     padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-.register-container form {
+.register-login-container form {
     width: 70%;
     max-width: 300px;
     margin-top: 20px;
 }
 
-.register-container h1 {
+.register-login-container h1 {
     margin-top: 0;
     text-transform: uppercase;
 }
 
-.register-container h2 {
+.register-login-container h2 {
     text-transform: uppercase;
 }
 
-.register-container p {
+.register-login-container p {
     width: 70%;
     max-width: 300px;
     margin-top: 0;
@@ -182,8 +190,6 @@ canvas {
 }
 
 .register-button-container {
-    display: flex;
-    justify-content: center;
     margin-top: 15px;
 }
 
@@ -191,11 +197,7 @@ canvas {
 
 .login-form-container {
     width: 100%;
-    /* max-width: 300px; */
-    display: flex;
-    justify-content: center;
     height: 100%;
-    align-items: center;
 }
 
 .login-form-container form {
