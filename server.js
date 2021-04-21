@@ -12,6 +12,11 @@ app.set("view engine", "handlebars");
 
 // Require cookie-session
 const cookieSession = require("cookie-session");
+
+// Require csurf
+const csurf = require("csurf");
+
+// cookieSession middleware
 app.use(
     cookieSession({
         secret: cookieSecret,
@@ -19,14 +24,26 @@ app.use(
     })
 );
 
+// csurf middleware
+app.use(csurf());
+
+// Prevent clickjacking and CSRF
+app.use(function (req, res, next) {
+    res.setHeader("x-frame-options", "deny");
+    res.locals.csrfToken = req.csrfToken();
+    next();
+});
+
+// Serve static files from public folder
+app.use(express.static("public"));
+
 app.use(
     express.urlencoded({
         extended: false,
     })
 );
 
-// Serve static files from public folder
-app.use(express.static("public"));
+// Requests
 
 app.get("/petition", (req, res) => {
     if (req.session.signatureId) {
