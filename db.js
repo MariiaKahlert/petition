@@ -6,6 +6,7 @@ module.exports.signPetition = (firstName, lastName, signature) => {
         `
             INSERT INTO signatures (first_name, last_name, signature)
             VALUES ($1, $2, $3)
+            RETURNING id
         `,
         [firstName, lastName, signature]
     );
@@ -15,6 +16,15 @@ module.exports.getFirstAndLastNames = () => {
     return db.query(
         `
             SELECT first_name, last_name FROM signatures
+        `
+    );
+};
+
+module.exports.getSignature = (userId) => {
+    return db.query(
+        `
+        SELECT signature FROM signatures
+        WHERE id = ${userId}
         `
     );
 };

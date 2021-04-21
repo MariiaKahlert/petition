@@ -1,4 +1,4 @@
-const { signPetition, getFirstAndLastNames } = require("./db");
+const { signPetition, getFirstAndLastNames, getSignature } = require("./db");
 const { "cookie-secret": cookieSecret } = require("./secrets.json");
 
 // Require express
@@ -9,10 +9,6 @@ const app = express();
 const hb = require("express-handlebars");
 app.engine("handlebars", hb());
 app.set("view engine", "handlebars");
-
-// Require cookie-parser
-// const cp = require("cookie-parser");
-// app.use(cp());
 
 // Require cookie-session
 const cookieSession = require("cookie-session");
@@ -33,7 +29,7 @@ app.use(
 app.use(express.static("public"));
 
 app.get("/petition", (req, res) => {
-    if (req.cookies.signedPetition) {
+    if (req.session.signatureId) {
         return res.redirect("/thanks");
     }
     res.render("petition", {
@@ -48,8 +44,11 @@ app.post("/petition", (req, res) => {
         signature,
     } = req.body;
     signPetition(firstName, lastName, signature)
-        .then(() => {
-            res.cookie("signedPetition", "true");
+        .then((result) => {
+            const { id } = result.rows[0];
+            console.log(id);
+            // res.session("signatureId", id);
+            req.session.signatureId = id;
             res.redirect("/thanks");
         })
         .catch(() => {
@@ -61,16 +60,22 @@ app.post("/petition", (req, res) => {
 });
 
 app.get("/thanks", (req, res) => {
-    if (!req.cookies.signedPetition) {
+    if (!req.session.signatureId) {
         return res.redirect("/petition");
     }
-    res.render("thanks", {
-        layout: "main",
-    });
+    getSignature(req.session.signatureId)
+        .then((result) => {
+            const { signature } = result.rows[0];
+            res.render("thanks", {
+                layout: "main",
+                signature: signature,
+            });
+        })
+        .catch();
 });
 
 app.get("/signers", (req, res) => {
-    if (!req.cookies.signedPetition) {
+    if (!req.session.signatureId) {
         return res.redirect("/petition");
     }
     getFirstAndLastNames()
