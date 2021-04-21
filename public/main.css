@@ -186,3 +186,18 @@ canvas {
     justify-content: center;
     margin-top: 15px;
 }
+
+/* login.handlebars styles  */
+
+.login-form-container {
+    width: 100%;
+    /* max-width: 300px; */
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+
+.login-form-container form {
+    margin-top: 0;
+}

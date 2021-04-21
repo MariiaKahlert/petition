@@ -52,6 +52,13 @@ app.get("/register", (req, res) => {
     });
 });
 
+// Log in
+app.get("/login", (req, res) => {
+    res.render("login", {
+        layout: "main",
+    });
+});
+
 app.get("/petition", (req, res) => {
     if (req.session.signatureId) {
         return res.redirect("/thanks");
