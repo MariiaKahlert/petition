@@ -46,8 +46,6 @@ app.post("/petition", (req, res) => {
     signPetition(firstName, lastName, signature)
         .then((result) => {
             const { id } = result.rows[0];
-            console.log(id);
-            // res.session("signatureId", id);
             req.session.signatureId = id;
             res.redirect("/thanks");
         })
