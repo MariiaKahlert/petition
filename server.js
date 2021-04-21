@@ -4,17 +4,16 @@ const { "cookie-secret": cookieSecret } = require("./secrets.json");
 // Require express
 const express = require("express");
 const app = express();
-
 // Require express-handlebars
 const hb = require("express-handlebars");
 app.engine("handlebars", hb());
 app.set("view engine", "handlebars");
-
 // Require cookie-session
 const cookieSession = require("cookie-session");
-
 // Require csurf
 const csurf = require("csurf");
+
+// MIDDLEWARES
 
 // cookieSession middleware
 app.use(
@@ -24,6 +23,7 @@ app.use(
     })
 );
 
+// urlencoded middleware
 app.use(
     express.urlencoded({
         extended: false,
@@ -33,7 +33,7 @@ app.use(
 // csurf middleware
 app.use(csurf());
 
-// Prevent clickjacking and CSRF
+// clickjacking and CSRF middleware
 app.use(function (req, res, next) {
     res.setHeader("x-frame-options", "deny");
     res.locals.csrfToken = req.csrfToken();
@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
 // Serve static files from public folder
 app.use(express.static("public"));
 
-// Requests
+// REQUESTS
 
 app.get("/petition", (req, res) => {
     if (req.session.signatureId) {
