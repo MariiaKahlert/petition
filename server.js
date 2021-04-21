@@ -24,6 +24,12 @@ app.use(
     })
 );
 
+app.use(
+    express.urlencoded({
+        extended: false,
+    })
+);
+
 // csurf middleware
 app.use(csurf());
 
@@ -36,12 +42,6 @@ app.use(function (req, res, next) {
 
 // Serve static files from public folder
 app.use(express.static("public"));
-
-app.use(
-    express.urlencoded({
-        extended: false,
-    })
-);
 
 // Requests
 
