@@ -1,8 +1,8 @@
 <div class="main-petition-container">
     <div class="petition-container"> 
-        <h1># sex-disaggregate your data</h1> 
-        <h3>Sign my petition to oblige medical trials to disaggregate their data by sex</h3>
-        <form method="POST">
+        <h1>Sign my petition</h1>
+        <h2>to oblige medical trials to disaggregate their data by sex and to include at least 50% of female participants thereby starting solving the problem of the default male norm.</h2>
+        <form method="POST" autocomplete="off">
             <div class="form-container">
                 {{#if error}}
                     <p><em>Something went wrong. Please, try again.</em></p>
@@ -19,12 +19,12 @@
                 </div>
                 <input type="hidden" name="signature" id="signature" required>
                 <div class="canvas-container">
-                    <p>Sign here</p>
+                    <p><em>Sign here</em></p>
                     <canvas height="50px" width="400px"></canvas>
                 </div>
                 <button type="submit">Submit</button>
                 </div>
-                
+
                 {{!-- Prevent CSRF --}}
                 <input type="hidden" name="_csrf" value="{{csrfToken}}">
         </form>
