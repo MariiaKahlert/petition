@@ -20,11 +20,11 @@ module.exports.getFirstAndLastNames = () => {
     );
 };
 
-module.exports.getSignature = (userId) => {
+module.exports.getSignature = (signatureId) => {
     return db.query(
         `
         SELECT signature FROM signatures
-        WHERE id = ${userId}
+        WHERE id = ${signatureId}
         `
     );
 };

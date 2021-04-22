@@ -60,7 +60,7 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/petition", (req, res) => {
-    if (req.session.userId) {
+    if (req.session.signatureId) {
         return res.redirect("/thanks");
     }
     res.render("petition", {
@@ -77,7 +77,7 @@ app.post("/petition", (req, res) => {
     signPetition(firstName, lastName, signature)
         .then((result) => {
             const { id } = result.rows[0];
-            req.session.userId = id;
+            req.session.signatureId = id;
             res.redirect("/thanks");
         })
         .catch(() => {
@@ -89,10 +89,10 @@ app.post("/petition", (req, res) => {
 });
 
 app.get("/thanks", (req, res) => {
-    if (!req.session.userId) {
+    if (!req.session.signatureId) {
         return res.redirect("/petition");
     }
-    getSignature(req.session.userId)
+    getSignature(req.session.signatureId)
         .then((result) => {
             const { signature } = result.rows[0];
             res.render("thanks", {
@@ -104,7 +104,7 @@ app.get("/thanks", (req, res) => {
 });
 
 app.get("/signers", (req, res) => {
-    if (!req.session.userId) {
+    if (!req.session.signatureId) {
         return res.redirect("/petition");
     }
     getFirstAndLastNames()
