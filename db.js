@@ -12,6 +12,15 @@ module.exports.insertUser = (firstName, lastName, email, passwordHash) => {
     );
 };
 
+module.exports.getUser = (email) => {
+    return db.query(
+        `
+            SELECT * FROM users
+            WHERE email = ${email}
+        `
+    );
+};
+
 module.exports.signPetition = (firstName, lastName, signature) => {
     return db.query(
         `

@@ -1,5 +1,6 @@
 const {
     insertUser,
+    getUser,
     signPetition,
     getFirstAndLastNames,
     getSignature,
@@ -93,6 +94,40 @@ app.get("/login", (req, res) => {
     res.render("login", {
         layout: "main",
     });
+});
+
+app.post("/login", (req, res) => {
+    console.log(req.body);
+    const { email, password } = req.body;
+    getUser(email)
+        .then((result) => {
+            if (!result.row[0].email) {
+                res.render("login", {
+                    layout: "main",
+                    noUserError: "No user exists for this email!",
+                });
+                return;
+            }
+            console.log(result.row[0]);
+            compare(password, result.row[0].password_hash).then((match) => {
+                if (match === true) {
+                    req.session.userId = result.row[0].id;
+                    res.redirect("/petition");
+                } else {
+                    res.render("login", {
+                        layout: "main",
+                        wrongPassword: "Wrong password!",
+                    });
+                }
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.render("login", {
+                layout: "main",
+                error: "Wrong user input",
+            });
+        });
 });
 
 app.get("/petition", (req, res) => {
