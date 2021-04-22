@@ -7,10 +7,18 @@ body {
     font-family: "Barlow Condensed", sans-serif;
 }
 
+a {
+    transition-duration: 0.2s;
+}
+
 a,
 a:active,
 a:visited {
     color: #f6f4d2;
+}
+
+a:hover {
+    opacity: 0.75;
 }
 
 label {
@@ -43,6 +51,7 @@ button {
     font-size: 20px;
     transition-duration: 0.2s;
     margin-bottom: 5px;
+    margin-top: 50px;
 }
 
 button:focus {
@@ -55,6 +64,7 @@ button:hover {
 
 .error {
     color: #f19c79;
+    margin-bottom: 0;
 }
 
 /* Colors */
@@ -103,21 +113,31 @@ button:hover {
     box-shadow: 0 4px 12px 0 rgb(0 0 0 / 35%);
     border-radius: 5px;
     padding: 15px;
+    height: 80vh;
+    width: 50%;
+}
+
+.facts-container h2 {
+    text-align: center;
+}
+
+.facts-list {
+    width: 80%;
+}
+
+.facts-list li {
+    margin-bottom: 15px;
 }
 
 .petition-container {
-    width: 500px;
     box-shadow: 0 4px 12px 0 rgb(0 0 0 / 35%);
     border-radius: 5px;
+    height: 60%;
+    width: 40%;
 }
 
 .petition-container h2 {
     text-align: center;
-}
-
-.petition-form-container {
-    width: 500px;
-    height: 500px;
 }
 
 .inputs {
@@ -201,6 +221,10 @@ canvas {
 
 .register-button-container {
     margin-top: 15px;
+}
+
+#register-button {
+    margin-top: 0;
 }
 
 /* login.handlebars styles  */

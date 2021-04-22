@@ -1,7 +1,7 @@
 {{#>register-login}}
 <p>Sign my petition if you think it should be the job of all medical trials to disaggregate their data by sex and to include at least 50% of female participants!</p>
 {{#if error}}
-    <p>{{error}}</p>
+    <p class="error">{{error}}</p>
 {{/if}}
 <form method="POST" autocomplete="off">
     <div class="flex flex-column">
@@ -14,7 +14,7 @@
         <label for="register-password">Password</label>
         <input type="password" name="register-password" id="register-password" required>
         <div class="flex flex-column align-center register-button-container">
-            <button type="submit">Sign up</button>
+            <button id="register-button" type="submit">Sign up</button>
             <a href="/login">Log in</a>
         </div>  
     </div>

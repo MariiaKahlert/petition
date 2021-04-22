@@ -1,9 +1,20 @@
 <div class="flex justify-evenly align-center" style="height: 100vh">
-    <div class="flex flex-column text-carmine bg-goldenrod facts-container">
-        <h2>Why is disaggregating data by sex so important?</h2>
-        <h3>Here are some facts:</h3>
+    <div class="flex flex-column align-center justify-evenly text-carmine bg-goldenrod facts-container">
+        {{!-- <div class="facts-headers"> --}}
+            <h2>Why is disaggregating data by sex so important?</h2>
+            <h3>Here are some facts:</h3>
+            <div class="facts-list">
+            <ul>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+            </ul>
+            </div>
+        {{!-- </div>      --}}
     </div>
-    <div class="flex flex-column align-center petition-container"> 
+    <div class="flex flex-column align-center justify-center petition-container"> 
         <h2>Sign the petition</h2>
         <form method="POST" autocomplete="off">
             <div class="flex flex-column align-center justify-evenly petition-form-container">
@@ -13,7 +24,7 @@
                 <input type="hidden" name="signature" id="signature" required>
                 <div class="canvas-container">
                     <p><em>Sign here</em></p>
-                    <canvas height="50px" width="400px"></canvas>
+                    <canvas height="50px" width="300px"></canvas>
                 </div>
                 <button type="submit">Submit</button>
             </div>
