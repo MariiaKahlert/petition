@@ -1,6 +1,5 @@
 <div class="flex justify-evenly align-center main-petition-container" style="height: 100vh">
-    <div class="flex flex-column align-center justify-evenly text-carmine bg-goldenrod facts-container">
-        {{!-- <div class="facts-headers"> --}}
+    <div class="flex flex-column align-center justify-evenly text-carmine opacity-bg-goldenrod facts-container">
             <h2>Why is disaggregating data by sex so important?</h2>
             <h3>Here are some facts:</h3>
             <div class="facts-list">
@@ -12,14 +11,13 @@
                 <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
             </ul>
             </div>
-        {{!-- </div>      --}}
     </div>
-    <div class="flex flex-column align-center justify-center petition-container"> 
+    <div class="flex flex-column align-center justify-center opacity-bg-carmine petition-container"> 
         <h2>Sign the petition</h2>
         <form method="POST" autocomplete="off">
             <div class="flex flex-column align-center justify-evenly petition-form-container">
                 {{#if error}}
-                    <p class="error"><em>{{error}}</em></p>
+                    <p class="error">{{error}}</p>
                 {{/if}}
                 <input type="hidden" name="signature" id="signature" required>
                 <div class="canvas-container">
@@ -28,7 +26,6 @@
                 </div>
                 <button type="submit">Submit</button>
             </div>
-
             {{!-- Prevent CSRF --}}
             <input type="hidden" name="_csrf" value="{{csrfToken}}">
         </form>

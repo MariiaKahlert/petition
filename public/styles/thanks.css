@@ -1,0 +1,20 @@
+.main-thanks-container {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url("../med2.jpg");
+    background-size: cover;
+}
+
+.thanks-container {
+    height: 80vh;
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 35%);
+    border-radius: 5px;
+    width: 60%;
+    max-width: 600px;
+}
+
+.signature-container {
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 5px;
+}

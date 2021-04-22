@@ -1,0 +1,54 @@
+.main-petition-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url(../med2.jpg);
+    background-size: cover;
+}
+
+.facts-container {
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 35%);
+    border-radius: 5px;
+    padding: 15px;
+    height: 80vh;
+    width: 50%;
+    max-width: 600px;
+}
+
+.facts-container h2 {
+    text-align: center;
+}
+
+.facts-list {
+    width: 80%;
+}
+
+.facts-list li {
+    margin-bottom: 15px;
+}
+
+.petition-container {
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 35%);
+    border-radius: 5px;
+    height: 60%;
+    width: 40%;
+    max-width: 400px;
+}
+
+.petition-container h2 {
+    text-align: center;
+}
+
+.inputs {
+    width: 80%;
+}
+
+.input-container {
+    margin-bottom: 10px;
+}
+
+.canvas-container p {
+    font-size: 20px;
+}
+
+canvas {
+    border: 1px dotted;
+}
