@@ -1,5 +1,6 @@
 const { signPetition, getFirstAndLastNames, getSignature } = require("./db");
 const { "cookie-secret": cookieSecret } = require("./secrets.json");
+const { hash, compare } = require("./utils/bcrypt");
 
 // Require express
 const express = require("express");
@@ -49,6 +50,13 @@ app.use(express.static("public"));
 app.get("/register", (req, res) => {
     res.render("register", {
         layout: "main",
+    });
+});
+
+app.post("/register", (req, res) => {
+    res.render("register", {
+        layout: "main",
+        error: "Invalid user input",
     });
 });
 
