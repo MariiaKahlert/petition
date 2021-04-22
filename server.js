@@ -50,6 +50,15 @@ app.use((req, res, next) => {
 // Serve static files from public folder
 app.use(express.static("public"));
 
+// Middleware to check if there's userId in cookie session and redirect to login page if not
+app.use((req, res, next) => {
+    const urls = ["/petition", "/thanks", "/signers"];
+    if (urls.includes(req.url) && !req.session.userId) {
+        return res.redirect("/login");
+    }
+    next();
+});
+
 // REQUESTS
 
 // Register
@@ -60,7 +69,6 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-    console.log(req.body);
     const {
         "register-first": firstName,
         "register-last": lastName,
@@ -73,7 +81,6 @@ app.post("/register", (req, res) => {
             // Insert user into db
             insertUser(firstName, lastName, email, passwordHash)
                 .then((result) => {
-                    console.log(result);
                     const { id } = result.rows[0];
                     req.session.userId = id;
                     res.redirect("/petition");
@@ -97,11 +104,9 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    console.log(req.body);
     const { "login-email": email, "login-password": password } = req.body;
     getUser(email)
         .then((result) => {
-            console.log(result);
             if (result.rows.length === 0) {
                 res.render("login", {
                     layout: "main",
@@ -109,7 +114,6 @@ app.post("/login", (req, res) => {
                 });
                 return;
             }
-            console.log(result.rows[0]);
             compare(password, result.rows[0].password_hash).then((match) => {
                 if (match === true) {
                     req.session.userId = result.rows[0].id;
@@ -132,27 +136,27 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/petition", (req, res) => {
-    if (req.session.signatureId) {
-        return res.redirect("/thanks");
-    }
-    res.render("petition", {
-        layout: "main",
+    getSignature(req.session.userId).then((result) => {
+        if (result.rows.length === 0) {
+            res.render("petition", {
+                layout: "main",
+            });
+            return;
+        }
+        res.redirect("/thanks");
     });
 });
 
 app.post("/petition", (req, res) => {
-    const {
-        "first-name": firstName,
-        "last-name": lastName,
-        signature,
-    } = req.body;
-    signPetition(firstName, lastName, signature)
+    const { userId } = req.session;
+    const { signature } = req.body;
+    signPetition(userId, signature)
         .then((result) => {
-            const { id } = result.rows[0];
-            req.session.signatureId = id;
+            console.log(result);
             res.redirect("/thanks");
         })
-        .catch(() => {
+        .catch((err) => {
+            console.log(err);
             res.render("petition", {
                 layout: "main",
                 error: true,
@@ -161,32 +165,36 @@ app.post("/petition", (req, res) => {
 });
 
 app.get("/thanks", (req, res) => {
-    if (!req.session.signatureId) {
-        return res.redirect("/petition");
-    }
-    getSignature(req.session.signatureId)
+    getSignature(req.session.userId)
         .then((result) => {
+            if (result.rows.length === 0) {
+                return res.redirect("/petition");
+            }
             const { signature } = result.rows[0];
             res.render("thanks", {
                 layout: "main",
                 signature,
             });
         })
-        .catch();
+        .catch((err) => console.log(err));
 });
 
 app.get("/signers", (req, res) => {
-    if (!req.session.signatureId) {
-        return res.redirect("/petition");
-    }
-    getFirstAndLastNames()
+    getSignature(req.session.userId)
         .then((result) => {
-            res.render("signers", {
-                layout: "main",
-                signers: result.rows,
-            });
+            if (result.rows.length === 0) {
+                return res.redirect("/petition");
+            }
+            getFirstAndLastNames()
+                .then((result) => {
+                    res.render("signers", {
+                        layout: "main",
+                        signers: result.rows,
+                    });
+                })
+                .catch((err) => console.log(err));
         })
-        .catch();
+        .catch((err) => console.log(err));
 });
 
 app.listen(8080, () => console.log("Server listening on port 8080"));

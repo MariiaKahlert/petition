@@ -22,30 +22,32 @@ module.exports.getUser = (email) => {
     );
 };
 
-module.exports.signPetition = (firstName, lastName, signature) => {
+module.exports.signPetition = (userId, signature) => {
     return db.query(
         `
-            INSERT INTO signatures (first_name, last_name, signature)
-            VALUES ($1, $2, $3)
+            INSERT INTO signatures (user_id, signature)
+            VALUES ($1, $2)
             RETURNING id
         `,
-        [firstName, lastName, signature]
+        [userId, signature]
     );
 };
 
 module.exports.getFirstAndLastNames = () => {
     return db.query(
         `
-            SELECT first_name, last_name FROM signatures
+            SELECT first_name, last_name FROM users
+            JOIN signatures ON signatures.user_id = users.id
         `
     );
 };
 
-module.exports.getSignature = (signatureId) => {
+module.exports.getSignature = (userId) => {
     return db.query(
         `
         SELECT signature FROM signatures
-        WHERE id = ${signatureId}
-        `
+        WHERE user_id = $1
+        `,
+        [userId]
     );
 };
