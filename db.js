@@ -16,8 +16,9 @@ module.exports.getUser = (email) => {
     return db.query(
         `
             SELECT * FROM users
-            WHERE email = ${email}
-        `
+            WHERE email = $1
+        `,
+        [email]
     );
 };
 

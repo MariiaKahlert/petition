@@ -98,20 +98,21 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {
     console.log(req.body);
-    const { email, password } = req.body;
+    const { "login-email": email, "login-password": password } = req.body;
     getUser(email)
         .then((result) => {
-            if (!result.row[0].email) {
+            console.log(result);
+            if (result.rows.length === 0) {
                 res.render("login", {
                     layout: "main",
                     noUserError: "No user exists for this email!",
                 });
                 return;
             }
-            console.log(result.row[0]);
-            compare(password, result.row[0].password_hash).then((match) => {
+            console.log(result.rows[0]);
+            compare(password, result.rows[0].password_hash).then((match) => {
                 if (match === true) {
-                    req.session.userId = result.row[0].id;
+                    req.session.userId = result.rows[0].id;
                     res.redirect("/petition");
                 } else {
                     res.render("login", {
