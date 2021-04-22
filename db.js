@@ -33,7 +33,7 @@ module.exports.signPetition = (userId, signature) => {
     );
 };
 
-module.exports.getFirstAndLastNames = () => {
+module.exports.getSigners = () => {
     return db.query(
         `
             SELECT first_name, last_name FROM users

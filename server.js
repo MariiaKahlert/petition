@@ -2,7 +2,7 @@ const {
     insertUser,
     getUser,
     signPetition,
-    getFirstAndLastNames,
+    getSigners,
     getSignature,
 } = require("./db");
 const { "cookie-secret": cookieSecret } = require("./secrets.json");
@@ -185,7 +185,7 @@ app.get("/signers", (req, res) => {
             if (result.rows.length === 0) {
                 return res.redirect("/petition");
             }
-            getFirstAndLastNames()
+            getSigners()
                 .then((result) => {
                     res.render("signers", {
                         layout: "main",
