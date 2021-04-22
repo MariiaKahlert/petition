@@ -13,8 +13,9 @@
         <input type="email" name="register-email" id="register-email" required>
         <label for="register-password">Password</label>
         <input type="password" name="register-password" id="register-password" required>
-        <div class="flex justify-center register-button-container">
+        <div class="flex flex-column align-center register-button-container">
             <button type="submit">Sign up</button>
+            <a href="/login">Log in</a>
         </div>  
     </div>
 <input type="hidden" name="_csrf" value="{{csrfToken}}">

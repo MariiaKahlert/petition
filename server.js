@@ -89,7 +89,7 @@ app.post("/register", (req, res) => {
                     console.log(err);
                     res.render("register", {
                         layout: "main",
-                        error: "Invalid user input",
+                        error: "Invalid user input...",
                     });
                 });
         })
@@ -110,7 +110,7 @@ app.post("/login", (req, res) => {
             if (result.rows.length === 0) {
                 res.render("login", {
                     layout: "main",
-                    noUserError: "No user exists for this email!",
+                    noUserError: "No user exists for this email...",
                 });
                 return;
             }
@@ -121,7 +121,7 @@ app.post("/login", (req, res) => {
                 } else {
                     res.render("login", {
                         layout: "main",
-                        wrongPassword: "Wrong password!",
+                        wrongPassword: "Wrong password...",
                     });
                 }
             });
@@ -130,7 +130,7 @@ app.post("/login", (req, res) => {
             console.log(err);
             res.render("login", {
                 layout: "main",
-                error: "Wrong user input",
+                error: "Wrong user input...",
             });
         });
 });
@@ -159,7 +159,7 @@ app.post("/petition", (req, res) => {
             console.log(err);
             res.render("petition", {
                 layout: "main",
-                error: true,
+                error: "Something went wrong. Please, try to sign again.",
             });
         });
 });

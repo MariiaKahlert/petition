@@ -4,8 +4,6 @@
 
 body {
     margin: 0;
-    /* background-color: #a44a3f; */
-    /* color: #f6f4d2; */
     font-family: "Barlow Condensed", sans-serif;
 }
 
@@ -44,6 +42,7 @@ button {
     cursor: pointer;
     font-size: 20px;
     transition-duration: 0.2s;
+    margin-bottom: 5px;
 }
 
 button:focus {
@@ -52,6 +51,10 @@ button:focus {
 
 button:hover {
     opacity: 0.75;
+}
+
+.error {
+    color: #f19c79;
 }
 
 /* Colors */
@@ -96,9 +99,16 @@ button:hover {
 
 /* petition.handlebars styles */
 
+.facts-container {
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 35%);
+    border-radius: 5px;
+    padding: 15px;
+}
+
 .petition-container {
-    height: 100vh;
     width: 500px;
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 35%);
+    border-radius: 5px;
 }
 
 .petition-container h2 {

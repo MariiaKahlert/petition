@@ -1,22 +1,23 @@
 {{#>register-login}}
-<div class="flex justify-center align-center login-form-container">
+<div class="flex flex-column justify-center align-center login-form-container">
     {{#if error}}
-        <p>{{error}}</p>
+        <p class="error">{{error}}</p>
+    {{/if}}
+    {{#if noUserError}}
+        <p class="error">{{noUserError}}</p>
+    {{/if}}
+    {{#if wrongPassword}}
+        <p class="error">{{wrongPassword}}</p>
     {{/if}}
     <form method="POST" autocomplete="off">
         <div class="flex flex-column">
-            {{#if noUserError}}
-                <p>{{noUserError}}</p>
-            {{/if}}
             <label for="login-email">Email</label>
             <input type="email" name="login-email" id="login-email" required>
-            {{#if wrongPassword}}
-                <p>{{wrongPassword}}</p>
-            {{/if}}
             <label for="login-password">Password</label>
             <input type="password" name="login-password" id="login-password" required>
-            <div class="flex justify-center register-button-container">
+            <div class="flex flex-column align-center register-button-container">
                 <button type="submit">Log in</button>
+                <a href="/register">Sign up</a>
             </div>  
         </div>
     <input type="hidden" name="_csrf" value="{{csrfToken}}">

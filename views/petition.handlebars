@@ -1,22 +1,15 @@
-<div class="flex justify-center">
+<div class="flex justify-evenly align-center" style="height: 100vh">
+    <div class="flex flex-column text-carmine bg-goldenrod facts-container">
+        <h2>Why is disaggregating data by sex so important?</h2>
+        <h3>Here are some facts:</h3>
+    </div>
     <div class="flex flex-column align-center petition-container"> 
-        <h1>Sign my petition</h1>
-        <h2>to oblige medical trials to disaggregate their data by sex and to include at least 50% of female participants thereby starting solving the problem of the default male norm.</h2>
+        <h2>Sign the petition</h2>
         <form method="POST" autocomplete="off">
             <div class="flex flex-column align-center justify-evenly petition-form-container">
                 {{#if error}}
-                    <p><em>Something went wrong. Please, try again.</em></p>
+                    <p class="error"><em>{{error}}</em></p>
                 {{/if}}
-                {{!-- <div class="inputs">
-                    <div class="flex flex-column input-container">
-                        <label for="first-name">First name</label>
-                        <input type="text" name="first-name" id="first-name" required>
-                    </div>
-                    <div class="flex flex-column input-container">
-                        <label for="last-name">Last name</label>
-                        <input type="text" name="last-name" id="last-name" required>
-                    </div>
-                </div> --}}
                 <input type="hidden" name="signature" id="signature" required>
                 <div class="canvas-container">
                     <p><em>Sign here</em></p>
