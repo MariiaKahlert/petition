@@ -34,7 +34,7 @@ app.use(
 app.use(csurf());
 
 // clickjacking and CSRF middleware
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
     res.setHeader("x-frame-options", "deny");
     res.locals.csrfToken = req.csrfToken();
     next();
@@ -60,7 +60,7 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/petition", (req, res) => {
-    if (req.session.signatureId) {
+    if (req.session.userId) {
         return res.redirect("/thanks");
     }
     res.render("petition", {
@@ -77,7 +77,7 @@ app.post("/petition", (req, res) => {
     signPetition(firstName, lastName, signature)
         .then((result) => {
             const { id } = result.rows[0];
-            req.session.signatureId = id;
+            req.session.userId = id;
             res.redirect("/thanks");
         })
         .catch(() => {
@@ -89,22 +89,22 @@ app.post("/petition", (req, res) => {
 });
 
 app.get("/thanks", (req, res) => {
-    if (!req.session.signatureId) {
+    if (!req.session.userId) {
         return res.redirect("/petition");
     }
-    getSignature(req.session.signatureId)
+    getSignature(req.session.userId)
         .then((result) => {
             const { signature } = result.rows[0];
             res.render("thanks", {
                 layout: "main",
-                signature: signature,
+                signature,
             });
         })
         .catch();
 });
 
 app.get("/signers", (req, res) => {
-    if (!req.session.signatureId) {
+    if (!req.session.userId) {
         return res.redirect("/petition");
     }
     getFirstAndLastNames()
