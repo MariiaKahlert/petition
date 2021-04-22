@@ -1,4 +1,9 @@
-const { signPetition, getFirstAndLastNames, getSignature } = require("./db");
+const {
+    insertUser,
+    signPetition,
+    getFirstAndLastNames,
+    getSignature,
+} = require("./db");
 const { "cookie-secret": cookieSecret } = require("./secrets.json");
 const { hash, compare } = require("./utils/bcrypt");
 
@@ -54,10 +59,33 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-    res.render("register", {
-        layout: "main",
-        error: "Invalid user input",
-    });
+    console.log(req.body);
+    const {
+        "register-first": firstName,
+        "register-last": lastName,
+        "register-email": email,
+        "register-password": password,
+    } = req.body;
+    // Hash password
+    hash(password)
+        .then((passwordHash) => {
+            // Insert user into db
+            insertUser(firstName, lastName, email, passwordHash)
+                .then((result) => {
+                    console.log(result);
+                    const { id } = result.rows[0];
+                    req.session.userId = id;
+                    res.redirect("/petition");
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.render("register", {
+                        layout: "main",
+                        error: "Invalid user input",
+                    });
+                });
+        })
+        .catch();
 });
 
 // Log in
