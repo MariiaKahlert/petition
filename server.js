@@ -151,8 +151,7 @@ app.post("/petition", (req, res) => {
     const { userId } = req.session;
     const { signature } = req.body;
     signPetition(userId, signature)
-        .then((result) => {
-            console.log(result);
+        .then(() => {
             res.redirect("/thanks");
         })
         .catch((err) => {
