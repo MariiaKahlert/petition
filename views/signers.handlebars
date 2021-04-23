@@ -1,7 +1,7 @@
 <div class="flex justify-center align-center" style="height: 100vh">
     <div class="flex flex-column align-center signers-container">
-        {{#if params}}
-        <h2>Here are all signers from {{city}}</h2>
+        {{#if cityParam}}
+        <h2>Here are all from {{cityParam}} who signed!</h2>
         {{else}}
         <h2>Here are all who signed!</h2>
         {{/if}}
@@ -13,7 +13,10 @@
                     <p>{{first_name}} {{last_name}}</p>  
                 {{/if}}
                 <p>{{age}}</p>  
-                <a href="/signers/{{city}}">{{city}}</a> 
+                <p>{{cityParam}}</p>
+                {{#unless ../cityParam}}
+                    <a href="/signers/{{city}}">{{city}}</a>
+                {{/unless}}       
             </div>  
         {{/signers}}
     </div>

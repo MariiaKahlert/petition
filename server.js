@@ -252,7 +252,7 @@ app.get("/signers/:city", (req, res) => {
                 res.render("signers", {
                     layout: "main",
                     signers: result.rows,
-                    params: true,
+                    cityParam: req.params.city,
                 });
             });
         })
