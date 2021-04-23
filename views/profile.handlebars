@@ -1,0 +1,20 @@
+<div class="flex flex-column align-center justify-center" style="height: 100vh;">
+    <div class="flex flex-column align-center justify-center profile-container bg-goldenrod text-carmine">
+        <h2>Tell me more about yourself</h2>
+        <form method="POST" autocomplete="off">
+            <div class="flex flex-column">
+                <label for="age">Age</label>
+                <input class="bg-goldenrod text-carmine" type="text" name="age" id="age">
+                <label for="city">City</label>
+                <input class="bg-goldenrod text-carmine" type="text" name="city" id="city">
+                <label for="user-url">Website</label>
+                <input class="bg-goldenrod text-carmine" type="text" name="user-url" id="user-url">
+                <div class="flex flex-column align-center">
+                    <button class="bg-carmine text-goldenrod" type="submit" style="width: 50%">Submit</button>
+                    <a style="color: #a44a3f"href="/petition">Skip</a>  
+                </div>
+            </div>
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        </form>
+    </div>
+</div>

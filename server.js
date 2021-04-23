@@ -52,7 +52,7 @@ app.use(express.static("public"));
 
 // Middleware to check if there's userId in cookie session and redirect to login page if not
 app.use((req, res, next) => {
-    const urls = ["/petition", "/thanks", "/signers"];
+    const urls = ["/profile", "/petition", "/thanks", "/signers"];
     if (urls.includes(req.url) && !req.session.userId) {
         return res.redirect("/login");
     }
@@ -62,6 +62,7 @@ app.use((req, res, next) => {
 // REQUESTS
 
 // Register
+
 app.get("/register", (req, res) => {
     res.render("register", {
         layout: "main",
@@ -83,7 +84,7 @@ app.post("/register", (req, res) => {
                 .then((result) => {
                     const { id } = result.rows[0];
                     req.session.userId = id;
-                    res.redirect("/petition");
+                    res.redirect("/profile");
                 })
                 .catch((err) => {
                     console.log(err);
@@ -97,6 +98,7 @@ app.post("/register", (req, res) => {
 });
 
 // Log in
+
 app.get("/login", (req, res) => {
     res.render("login", {
         layout: "main",
@@ -135,6 +137,16 @@ app.post("/login", (req, res) => {
         });
 });
 
+// Profile
+
+app.get("/profile", (req, res) => {
+    res.render("profile", {
+        layout: "main",
+    });
+});
+
+// Petition
+
 app.get("/petition", (req, res) => {
     getSignature(req.session.userId).then((result) => {
         if (result.rows.length === 0) {
@@ -163,6 +175,8 @@ app.post("/petition", (req, res) => {
         });
 });
 
+// Thanks
+
 app.get("/thanks", (req, res) => {
     getSignature(req.session.userId)
         .then((result) => {
@@ -177,6 +191,8 @@ app.get("/thanks", (req, res) => {
         })
         .catch((err) => console.log(err));
 });
+
+// Signers
 
 app.get("/signers", (req, res) => {
     getSignature(req.session.userId)
