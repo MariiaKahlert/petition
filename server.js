@@ -234,7 +234,6 @@ app.get("/signers", (req, res) => {
                     res.render("signers", {
                         layout: "main",
                         signers: result.rows,
-                        hasUrl: true,
                     });
                 })
                 .catch((err) => console.log(err));

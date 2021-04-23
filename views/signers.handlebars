@@ -1,9 +1,9 @@
 <div class="signers-container">
     {{#signers}}
-        {{#if hasUrl}}
-            <p><a href="{{url}}">{{first_name}} {{last_name}}</a> | {{age}} | {{city}}</p>
+        {{#if url}}
+            <p><a target="_blank" href="{{url}}">{{first_name}} {{last_name}}</a> {{age}} {{city}}</p>
         {{else}}
-            <p>{{first_name}} {{last_name}} | {{age}} | {{city}}</p>
+            <p>{{first_name}} {{last_name}} {{age}} {{city}}</p>
         {{/if}}
     {{/signers}}
 </div>
