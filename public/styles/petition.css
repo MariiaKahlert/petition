@@ -13,8 +13,13 @@
     max-width: 600px;
 }
 
-.facts-container h2 {
+.facts-container h2,
+h3 {
     text-align: center;
+}
+
+.facts-container h3 {
+    max-width: 325px;
 }
 
 .facts-list {
