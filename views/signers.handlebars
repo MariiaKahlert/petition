@@ -7,14 +7,13 @@
         {{/if}}
         <div class="scroll-container">
             {{#signers}}
-                <div class="flex justify-evenly align-center opacity-bg-carmine signer">
+                <div class="flex align-center opacity-bg-carmine signer">
                     {{#if url}}
-                        <a target="_blank" href="{{url}}">{{first_name}} {{last_name}}</a>
+                        <a style="width: 50%" target="_blank" href="{{url}}">{{first_name}} {{last_name}}</a>
                     {{else}}
-                        <p>{{first_name}} {{last_name}}</p>  
+                        <p style="width: 50%">{{first_name}} {{last_name}}</p>  
                     {{/if}}
-                    <p>{{age}}</p>  
-                    <p>{{cityParam}}</p>
+                    <p style="width: 20%" >{{age}}</p>  
                     {{#unless ../cityParam}}
                         <a href="/signers/{{city}}">{{city}}</a>
                     {{/unless}}       

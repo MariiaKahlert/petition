@@ -10,8 +10,8 @@
 }
 
 .scroll-container {
-    width: 60%;
-    max-width: 300px;
+    width: 80%;
+    max-width: 350px;
     overflow-y: scroll;
     flex-grow: 1;
 }
@@ -20,4 +20,5 @@
     border-radius: 5px;
     box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
     margin-bottom: 5px;
+    padding: 0 15px;
 }
