@@ -147,7 +147,6 @@ app.get("/profile", (req, res) => {
 });
 
 app.post("/profile", (req, res) => {
-    console.log(req.body);
     const { userId } = req.session;
     let { age, city, "user-url": userUrl } = req.body;
     if (
@@ -235,6 +234,7 @@ app.get("/signers", (req, res) => {
                     res.render("signers", {
                         layout: "main",
                         signers: result.rows,
+                        hasUrl: true,
                     });
                 })
                 .catch((err) => console.log(err));

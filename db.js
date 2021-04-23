@@ -46,8 +46,10 @@ module.exports.signPetition = (userId, signature) => {
 module.exports.getSigners = () => {
     return db.query(
         `
-            SELECT first_name, last_name FROM users
+            SELECT first_name, last_name, age, city, url FROM user_profiles
+            JOIN users ON user_profiles.user_id = users.id
             JOIN signatures ON signatures.user_id = users.id
+            
         `
     );
 };
