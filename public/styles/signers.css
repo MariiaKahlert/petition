@@ -1,0 +1,19 @@
+.signers-container {
+    height: 80%;
+    width: 50%;
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 35%);
+    border-radius: 5px;
+    padding: 10px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url(../med2.jpg);
+    background-size: cover;
+    overflow: scroll;
+}
+
+.signer {
+    width: 60%;
+    max-width: 300px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
+    margin-bottom: 5px;
+}

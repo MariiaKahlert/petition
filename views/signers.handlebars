@@ -1,9 +1,17 @@
-<div class="signers-container">
-    {{#signers}}
-        {{#if url}}
-            <p><a target="_blank" href="{{url}}">{{first_name}} {{last_name}}</a> {{age}} {{city}}</p>
-        {{else}}
-            <p>{{first_name}} {{last_name}} {{age}} {{city}}</p>
-        {{/if}}
-    {{/signers}}
+<div class="flex justify-center align-center" style="height: 100vh">
+    <div class="flex flex-column align-center signers-container">
+        <h2>Here are all who signed!</h2>
+        {{#signers}}
+            <div class="flex justify-evenly align-center opacity-bg-carmine signer">
+                {{#if url}}
+                    <a target="_blank" href="{{url}}">{{first_name}} {{last_name}}</a>
+                {{else}}
+                    <p>{{first_name}} {{last_name}}</p>  
+                {{/if}}
+                <p>{{age}}</p>  
+                <p>{{city}}</p> 
+            </div>
+            
+        {{/signers}}
+    </div>
 </div>
