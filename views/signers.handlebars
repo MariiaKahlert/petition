@@ -1,23 +1,26 @@
 <div class="flex justify-center align-center" style="height: 100vh">
     <div class="flex flex-column align-center signers-container">
         {{#if cityParam}}
-        <h2>Here are all from {{cityParam}} who signed!</h2>
+        <h2>Here are all from <span style="text-transform: capitalize">{{cityParam}}</span> who signed!</h2>
         {{else}}
         <h2>Here are all who signed!</h2>
         {{/if}}
-        {{#signers}}
-            <div class="flex justify-evenly align-center opacity-bg-carmine signer">
-                {{#if url}}
-                    <a target="_blank" href="{{url}}">{{first_name}} {{last_name}}</a>
-                {{else}}
-                    <p>{{first_name}} {{last_name}}</p>  
-                {{/if}}
-                <p>{{age}}</p>  
-                <p>{{cityParam}}</p>
-                {{#unless ../cityParam}}
-                    <a href="/signers/{{city}}">{{city}}</a>
-                {{/unless}}       
-            </div>  
-        {{/signers}}
+        <div class="scroll-container">
+            {{#signers}}
+                <div class="flex justify-evenly align-center opacity-bg-carmine signer">
+                    {{#if url}}
+                        <a target="_blank" href="{{url}}">{{first_name}} {{last_name}}</a>
+                    {{else}}
+                        <p>{{first_name}} {{last_name}}</p>  
+                    {{/if}}
+                    <p>{{age}}</p>  
+                    <p>{{cityParam}}</p>
+                    {{#unless ../cityParam}}
+                        <a href="/signers/{{city}}">{{city}}</a>
+                    {{/unless}}       
+                </div>  
+            {{/signers}}
+        </div>
+
     </div>
 </div>

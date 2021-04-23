@@ -7,12 +7,16 @@
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
         url(../med2.jpg);
     background-size: cover;
-    overflow: scroll;
+}
+
+.scroll-container {
+    width: 60%;
+    max-width: 300px;
+    overflow-y: scroll;
+    flex-grow: 1;
 }
 
 .signer {
-    width: 60%;
-    max-width: 300px;
     border-radius: 5px;
     box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
     margin-bottom: 5px;
