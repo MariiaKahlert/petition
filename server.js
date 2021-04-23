@@ -5,6 +5,7 @@ const {
     signPetition,
     getSigners,
     getSignature,
+    getSignersByCity,
 } = require("./db");
 const { "cookie-secret": cookieSecret } = require("./secrets.json");
 const { hash, compare } = require("./utils/bcrypt");
@@ -237,6 +238,23 @@ app.get("/signers", (req, res) => {
                     });
                 })
                 .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
+});
+
+app.get("/signers/:city", (req, res) => {
+    getSignature(req.session.userId)
+        .then((result) => {
+            if (result.rows.length === 0) {
+                return res.redirect("/petition");
+            }
+            getSignersByCity(req.params.city).then((result) => {
+                res.render("signers", {
+                    layout: "main",
+                    signers: result.rows,
+                    params: true,
+                });
+            });
         })
         .catch((err) => console.log(err));
 });

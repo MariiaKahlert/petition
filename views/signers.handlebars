@@ -1,6 +1,10 @@
 <div class="flex justify-center align-center" style="height: 100vh">
     <div class="flex flex-column align-center signers-container">
+        {{#if params}}
+        <h2>Here are all signers from {{city}}</h2>
+        {{else}}
         <h2>Here are all who signed!</h2>
+        {{/if}}
         {{#signers}}
             <div class="flex justify-evenly align-center opacity-bg-carmine signer">
                 {{#if url}}
@@ -9,9 +13,8 @@
                     <p>{{first_name}} {{last_name}}</p>  
                 {{/if}}
                 <p>{{age}}</p>  
-                <p>{{city}}</p> 
-            </div>
-            
+                <a href="/signers/{{city}}">{{city}}</a> 
+            </div>  
         {{/signers}}
     </div>
 </div>

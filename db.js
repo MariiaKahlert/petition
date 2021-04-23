@@ -49,8 +49,20 @@ module.exports.getSigners = () => {
             SELECT first_name, last_name, age, city, url FROM user_profiles
             JOIN users ON user_profiles.user_id = users.id
             JOIN signatures ON signatures.user_id = users.id
-            
+    
         `
+    );
+};
+
+module.exports.getSignersByCity = (city) => {
+    return db.query(
+        `
+            SELECT first_name, last_name, age, city, url FROM user_profiles
+            JOIN users ON user_profiles.user_id = users.id
+            JOIN signatures ON signatures.user_id = users.id
+            WHERE LOWER(city) = LOWER($1)
+        `,
+        [city]
     );
 };
 
