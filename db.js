@@ -45,8 +45,8 @@ module.exports.getSigners = () => {
 module.exports.getSignature = (userId) => {
     return db.query(
         `
-        SELECT signature FROM signatures
-        WHERE user_id = $1
+            SELECT signature FROM signatures
+            WHERE user_id = $1
         `,
         [userId]
     );
