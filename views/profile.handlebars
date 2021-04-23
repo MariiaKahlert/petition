@@ -1,6 +1,9 @@
 <div class="flex flex-column align-center justify-center" style="height: 100vh;">
     <div class="flex flex-column align-center justify-center profile-container bg-goldenrod text-carmine">
         <h2>Tell me more about yourself</h2>
+        {{#if profileError}}
+            <p class="error">{{profileError}}</p>
+        {{/if}}
         <form method="POST" autocomplete="off">
             <div class="flex flex-column">
                 <label for="age">Age</label>

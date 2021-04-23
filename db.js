@@ -22,6 +22,16 @@ module.exports.getUser = (email) => {
     );
 };
 
+module.exports.createProfile = (userId, age, city, userUrl) => {
+    return db.query(
+        `
+            INSERT INTO user_profiles (user_id, age, city, url)
+            VALUES ($1, $2, $3, $4)
+        `,
+        [userId, age, city, userUrl]
+    );
+};
+
 module.exports.signPetition = (userId, signature) => {
     return db.query(
         `
