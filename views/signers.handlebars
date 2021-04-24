@@ -3,7 +3,7 @@
         {{#if cityParam}}
         <h2>Here are all from <span style="text-transform: capitalize">{{cityParam}}</span> who signed</h2>
         {{else}}
-        <h2>Here are all who signed</h2>
+        <h2>Here are all {{numOfSigners}} people who signed already</h2>
         {{/if}}
         <div class="scroll-container">
             {{#signers}}

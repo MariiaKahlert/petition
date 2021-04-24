@@ -232,9 +232,11 @@ app.get("/signers", (req, res) => {
             }
             getSigners()
                 .then((result) => {
+                    console.log(result);
                     res.render("signers", {
                         layout: "main",
                         signers: result.rows,
+                        numOfSigners: result.rowCount,
                     });
                 })
                 .catch((err) => console.log(err));
