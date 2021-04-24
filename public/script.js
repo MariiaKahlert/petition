@@ -25,7 +25,7 @@ canvas.mousemove((e) => {
     }
 });
 
-canvas.mouseup((e) => {
+$(document).mouseup((e) => {
     isDrawing = false;
     ctx.closePath();
     signature.val(e.target.toDataURL());
