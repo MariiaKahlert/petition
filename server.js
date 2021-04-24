@@ -232,7 +232,6 @@ app.get("/signers", (req, res) => {
             }
             getSigners()
                 .then((result) => {
-                    console.log(result);
                     res.render("signers", {
                         layout: "main",
                         signers: result.rows,
@@ -259,6 +258,11 @@ app.get("/signers/:city", (req, res) => {
             });
         })
         .catch((err) => console.log(err));
+});
+
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/login");
 });
 
 app.listen(8080, () => console.log("Server listening on port 8080"));
