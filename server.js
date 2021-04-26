@@ -1,6 +1,7 @@
 const {
     insertUser,
     getUser,
+    getUserAndUserProfile,
     createProfile,
     signPetition,
     getSigners,
@@ -54,7 +55,13 @@ app.use(express.static("public"));
 
 // Middleware to check if there's userId in cookie session and redirect to login page if not
 app.use((req, res, next) => {
-    const urls = ["/profile", "/petition", "/thanks", "/signers"];
+    const urls = [
+        "/profile",
+        "/profile/edit",
+        "/petition",
+        "/thanks",
+        "/signers",
+    ];
     if (urls.includes(req.url) && !req.session.userId) {
         return res.redirect("/login");
     }
@@ -178,10 +185,16 @@ app.post("/profile", (req, res) => {
 // Edit
 
 app.get("/profile/edit", (req, res) => {
-    res.render("edit", {
-        layout: "main",
-        editProfile: true,
-    });
+    console.log(req.session.userId);
+    getUserAndUserProfile(req.session.userId)
+        .then((result) => {
+            res.render("edit", {
+                layout: "main",
+                editProfile: true,
+                userInfo: result.rows,
+            });
+        })
+        .catch((err) => console.log(err));
 });
 
 // Petition

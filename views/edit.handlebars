@@ -2,23 +2,25 @@
 <h2>Edit your profile</h2>
 <form method="POST" autocomplete="off">
     <div class="flex flex-column">
+        {{#userInfo}}
         <label for="edit-first">First name</label>
-        <input class="bg-goldenrod text-carmine" type="text" name="edit-first" id="edit-first">
+        <input class="bg-goldenrod text-carmine" type="text" name="edit-first" id="edit-first" value="{{first_name}}">
         <label for="edit-last">Last name</label>
-        <input class="bg-goldenrod text-carmine" type="text" name="edit-last" id="edit-last">
+        <input class="bg-goldenrod text-carmine" type="text" name="edit-last" id="edit-last" value="{{last_name}}">
         <label for="edit-email">Email</label>
-        <input class="bg-goldenrod text-carmine" type="password" name="edit-email" id="edit-email">
+        <input class="bg-goldenrod text-carmine" type="email" name="edit-email" id="edit-email" value="{{email}}">
         <label for="edit-password">Password</label>
         <input class="bg-goldenrod text-carmine" type="password" name="edit-password" id="edit-password">
         <label for="edit-age">Age</label>
-        <input class="bg-goldenrod text-carmine" type="text" name="edit-age" id="edit-age">
+        <input class="bg-goldenrod text-carmine" type="text" name="edit-age" id="edit-age" value="{{age}}">
         <label for="edit-city">City</label>
-        <input class="bg-goldenrod text-carmine" type="text" name="edit-city" id="edit-city">
+        <input class="bg-goldenrod text-carmine" type="text" name="edit-city" id="edit-city" value="{{city}}">
         <label for="edit-user-url">Website</label>
-        <input class="bg-goldenrod text-carmine" type="text" name="edit-user-url" id="edit-user-url">
+        <input class="bg-goldenrod text-carmine" type="text" name="edit-user-url" id="edit-user-url" value="{{url}}">
         <div class="flex flex-column align-center">
             <button class="bg-carmine text-goldenrod" type="submit" style="width: 50%; margin-top: 20px">Submit</button> 
         </div>
+        {{/userInfo}}
     </div>
     <input type="hidden" name="_csrf" value="{{csrfToken}}">
 </form>

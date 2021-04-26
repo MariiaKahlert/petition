@@ -22,6 +22,17 @@ module.exports.getUser = (email) => {
     );
 };
 
+module.exports.getUserAndUserProfile = (userId) => {
+    return db.query(
+        `
+            SELECT first_name, last_name, email, age, city, url FROM users
+            LEFT JOIN user_profiles ON user_profiles.user_id = users.id
+            WHERE users.id = $1
+        `,
+        [userId]
+    );
+};
+
 module.exports.createProfile = (userId, age, city, userUrl) => {
     return db.query(
         `
