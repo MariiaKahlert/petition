@@ -1,0 +1,10 @@
+<div class="flex flex-column align-center" style="height: 100vh;">
+    {{#if editProfile}}
+        {{> header-links hideProfile=true hideSignature=false}}
+    {{else}}
+        {{> header-links hideProfile=true hideSignature=true}}
+    {{/if}}
+    <div class="flex flex-column align-center justify-center profile-container bg-goldenrod text-carmine">
+        {{> @partial-block}}
+    </div>
+</div>

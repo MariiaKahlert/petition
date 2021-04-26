@@ -175,6 +175,15 @@ app.post("/profile", (req, res) => {
         });
 });
 
+// Edit
+
+app.get("/profile/edit", (req, res) => {
+    res.render("edit", {
+        layout: "main",
+        editProfile: true,
+    });
+});
+
 // Petition
 
 app.get("/petition", (req, res) => {
