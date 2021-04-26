@@ -82,6 +82,12 @@ app.use((req, res, next) => {
 
 // REQUESTS
 
+// Root route
+
+app.get("/", (req, res) => {
+    res.redirect("/register");
+});
+
 // Register
 
 app.get("/register", (req, res) => {
