@@ -8,8 +8,9 @@ const {
     createProfile,
     signPetition,
     getSigners,
-    getSignature,
     getSignersByCity,
+    getSignature,
+    deleteSignature,
 } = require("./db");
 const { "cookie-secret": cookieSecret } = require("./secrets.json");
 const { hash, compare } = require("./utils/bcrypt");
@@ -277,6 +278,14 @@ app.get("/thanks", (req, res) => {
         .catch((err) => console.log(err));
 });
 
+// Delete signature
+
+app.post("/thanks", (req, res) => {
+    deleteSignature(req.session.userId)
+        .then(() => res.redirect("/petition"))
+        .catch((err) => console.log(err));
+});
+
 // Signers
 
 app.get("/signers", (req, res) => {
@@ -314,6 +323,8 @@ app.get("/signers/:city", (req, res) => {
         })
         .catch((err) => console.log(err));
 });
+
+// Log out
 
 app.get("/logout", (req, res) => {
     req.session = null;

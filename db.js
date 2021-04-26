@@ -122,3 +122,13 @@ module.exports.getSignature = (userId) => {
         [userId]
     );
 };
+
+module.exports.deleteSignature = (userId) => {
+    return db.query(
+        `
+            DELETE FROM signatures
+            WHERE user_id = $1
+        `,
+        [userId]
+    );
+};

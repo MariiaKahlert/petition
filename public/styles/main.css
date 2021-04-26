@@ -48,6 +48,7 @@ button {
     color: #a44a3f;
     background-color: #f6f4d2;
     cursor: pointer;
+    font-family: "Barlow Condensed", sans-serif;
     font-size: 20px;
     transition-duration: 0.2s;
     margin-bottom: 5px;
