@@ -132,3 +132,13 @@ module.exports.deleteSignature = (userId) => {
         [userId]
     );
 };
+
+module.exports.deleteProfile = (userId) => {
+    return db.query(
+        `
+            DELETE FROM users
+            WHERE id = $1
+        `,
+        [userId]
+    );
+};

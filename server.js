@@ -11,6 +11,7 @@ const {
     getSignersByCity,
     getSignature,
     deleteSignature,
+    deleteProfile,
 } = require("./db");
 const { "cookie-secret": cookieSecret } = require("./secrets.json");
 const { hash, compare } = require("./utils/bcrypt");
@@ -62,6 +63,7 @@ app.use((req, res, next) => {
     const urls = [
         "/profile",
         "/profile/edit",
+        "/profile/delete",
         "/petition",
         "/thanks",
         "/signers",
@@ -236,6 +238,16 @@ app.post("/profile/edit", (req, res) => {
     }
 });
 
+app.post("/profile/delete", (req, res) => {
+    console.log(req.body);
+    deleteProfile(req.session.userId)
+        .then(() => {
+            req.session = null;
+            res.redirect("/register");
+        })
+        .catch((err) => console.log(err));
+});
+
 // Petition
 
 app.get("/petition", (req, res) => {
@@ -295,8 +307,8 @@ app.post("/thanks", (req, res) => {
 
 app.get("/signers", (req, res) => {
     getSignature(req.session.userId)
-        .then((result) => {
-            if (result.rows.length === 0) {
+        .then((signatureResult) => {
+            if (signatureResult.rows.length === 0) {
                 return res.redirect("/petition");
             }
             getSigners()
@@ -305,6 +317,7 @@ app.get("/signers", (req, res) => {
                         layout: "main",
                         signers: result.rows,
                         numOfSigners: result.rowCount,
+                        hasSigned: signatureResult.rows.length !== 0,
                     });
                 })
                 .catch((err) => console.log(err));
@@ -314,8 +327,8 @@ app.get("/signers", (req, res) => {
 
 app.get("/signers/:city", (req, res) => {
     getSignature(req.session.userId)
-        .then((result) => {
-            if (result.rows.length === 0) {
+        .then((signatureResult) => {
+            if (signatureResult.rows.length === 0) {
                 return res.redirect("/petition");
             }
             getSignersByCity(req.params.city).then((result) => {
@@ -323,6 +336,7 @@ app.get("/signers/:city", (req, res) => {
                     layout: "main",
                     signers: result.rows,
                     cityParam: req.params.city,
+                    hasSigned: signatureResult.rows.length !== 0,
                 });
             });
         })

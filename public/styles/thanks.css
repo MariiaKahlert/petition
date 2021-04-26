@@ -19,7 +19,7 @@
     border-radius: 5px;
 }
 
-#remove-btn {
+.delete-btn {
     background: none;
     border: none;
     text-decoration: underline;
@@ -30,6 +30,6 @@
     width: 100%;
 }
 
-#remove-btn:hover {
+.delete-btn:hover {
     opacity: 1;
 }

@@ -14,7 +14,7 @@ CREATE TABLE users (
 
 CREATE TABLE user_profiles(
   id            SERIAL PRIMARY KEY,
-  user_id       INTEGER NOT NULL UNIQUE REFERENCES users(id),
+  user_id       INTEGER NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
   age           INTEGER,
   city          VARCHAR(100),
   url           VARCHAR(300),
@@ -23,7 +23,7 @@ CREATE TABLE user_profiles(
 
 CREATE TABLE signatures (
     id         SERIAL PRIMARY KEY,
-    user_id    INTEGER NOT NULL UNIQUE REFERENCES users (id),
+    user_id    INTEGER NOT NULL UNIQUE REFERENCES users (id) ON DELETE CASCADE,
     signature  TEXT NOT NULL CHECK (signature != ''),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
