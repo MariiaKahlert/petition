@@ -189,13 +189,18 @@ app.post("/profile", (req, res) => {
 // Edit
 
 app.get("/profile/edit", (req, res) => {
-    getUserAndUserProfile(req.session.userId)
-        .then((result) => {
-            res.render("edit", {
-                layout: "main",
-                editProfile: true,
-                userInfo: result.rows,
-            });
+    getSignature(req.session.userId)
+        .then((signatureResult) => {
+            getUserAndUserProfile(req.session.userId)
+                .then((result) => {
+                    res.render("edit", {
+                        layout: "main",
+                        userInfo: result.rows,
+                        editProfile: true,
+                        hasSigned: signatureResult.rows.length !== 0,
+                    });
+                })
+                .catch((err) => console.log(err));
         })
         .catch((err) => console.log(err));
 });

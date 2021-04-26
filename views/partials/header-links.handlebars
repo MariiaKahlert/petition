@@ -3,7 +3,11 @@
         <a class="header-link" href="/profile/edit">Edit profile</a>
     {{/unless}}
     {{#unless hideSignature}}
-        <a class="header-link" href="/thanks">See your signature</a>
+        {{#if hasSigned}}
+            <a class="header-link" href="/thanks">See your signature</a>
+        {{else}}
+            <a class="header-link" href="/petition">Sign petition</a>
+        {{/if}}   
     {{/unless}}
     <a class="header-link" href="/logout">Log out</a>
 </div>
