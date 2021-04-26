@@ -13,7 +13,13 @@ const {
     deleteSignature,
     deleteProfile,
 } = require("./db");
-const { "cookie-secret": cookieSecret } = require("./secrets.json");
+let cookieSecret;
+if (process.env.COOKIE_SECRET) {
+    cookieSecret = process.env.COOKIE_SECRET;
+} else {
+    cookieSecret = require("./secrets.json")["cookie-secret"];
+}
+
 const { hash, compare } = require("./utils/bcrypt");
 
 // Require express
@@ -349,4 +355,6 @@ app.get("/logout", (req, res) => {
     res.redirect("/login");
 });
 
-app.listen(8080, () => console.log("Server listening on port 8080"));
+app.listen(process.env.PORT || 8080, () =>
+    console.log("Server listening on port 8080")
+);
