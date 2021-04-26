@@ -239,7 +239,6 @@ app.post("/profile/edit", (req, res) => {
 });
 
 app.post("/profile/delete", (req, res) => {
-    console.log(req.body);
     deleteProfile(req.session.userId)
         .then(() => {
             req.session = null;

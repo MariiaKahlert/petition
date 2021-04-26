@@ -31,7 +31,8 @@ input {
     border: 1px solid;
     border-radius: 5px;
     padding: 15px;
-    font-size: 15px;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 18px;
     background-color: #a44a3f;
     color: #f6f4d2;
 }
