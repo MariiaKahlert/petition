@@ -2,6 +2,9 @@ const {
     insertUser,
     getUser,
     getUserAndUserProfile,
+    updateUser,
+    updateUserPassword,
+    upsertUserProfile,
     createProfile,
     signPetition,
     getSigners,
@@ -103,7 +106,7 @@ app.post("/register", (req, res) => {
                     });
                 });
         })
-        .catch();
+        .catch((err) => console.log(err));
 });
 
 // Log in
@@ -185,7 +188,6 @@ app.post("/profile", (req, res) => {
 // Edit
 
 app.get("/profile/edit", (req, res) => {
-    console.log(req.session.userId);
     getUserAndUserProfile(req.session.userId)
         .then((result) => {
             res.render("edit", {
@@ -195,6 +197,37 @@ app.get("/profile/edit", (req, res) => {
             });
         })
         .catch((err) => console.log(err));
+});
+
+app.post("/profile/edit", (req, res) => {
+    const { userId } = req.session;
+    const {
+        "edit-first": firstName,
+        "edit-last": lastName,
+        "edit-email": email,
+        "edit-password": password,
+        "edit-age": age,
+        "edit-city": city,
+        "edit-user-url": url,
+    } = req.body;
+    if (password.length !== 0) {
+        hash(password).then((passwordHash) => {
+            Promise.all([
+                updateUser(firstName, lastName, email, userId),
+                updateUserPassword(passwordHash, userId),
+                upsertUserProfile(age, city, url, userId),
+            ])
+                .then(() => res.redirect("/thanks"))
+                .catch((err) => console.log(err));
+        });
+    } else {
+        Promise.all([
+            updateUser(firstName, lastName, email, userId),
+            upsertUserProfile(age, city, url, userId),
+        ])
+            .then(() => res.redirect("/thanks"))
+            .catch((err) => console.log(err));
+    }
 });
 
 // Petition

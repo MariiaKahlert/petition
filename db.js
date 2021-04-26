@@ -33,6 +33,43 @@ module.exports.getUserAndUserProfile = (userId) => {
     );
 };
 
+module.exports.updateUser = (firstName, lastName, email, userId) => {
+    return db.query(
+        `
+            UPDATE users
+            SET first_name = $1,
+                last_name = $2,
+                email = $3
+            WHERE id = $4
+        `,
+        [firstName, lastName, email, userId]
+    );
+};
+
+module.exports.updateUserPassword = (password, userId) => {
+    return db.query(
+        `
+            UPDATE users
+            SET password_hash = $1
+            WHERE id = $2
+        `,
+        [password, userId]
+    );
+};
+
+module.exports.upsertUserProfile = (age, city, url, userId) => {
+    return db.query(
+        `
+            INSERT INTO user_profiles (age, city, url, user_id)
+            VALUES ($1, $2, $3, $4)
+            ON CONFLICT (user_id)
+            DO UPDATE SET age = $1, city = $2, url = $3
+            
+        `,
+        [age, city, url, userId]
+    );
+};
+
 module.exports.createProfile = (userId, age, city, userUrl) => {
     return db.query(
         `
@@ -48,7 +85,6 @@ module.exports.signPetition = (userId, signature) => {
         `
             INSERT INTO signatures (user_id, signature)
             VALUES ($1, $2)
-            RETURNING id
         `,
         [userId, signature]
     );
