@@ -67,11 +67,8 @@ app.use((req, res, next) => {
 });
 
 // Serve static files from public folder
-app.use(
-    express.static("public", {
-        maxAge: 1000 * 60 * 60 * 24 * 14,
-    })
-);
+app.use(express.static("public"));
+// {maxAge: 1000 * 60 * 60 * 24 * 14}
 
 // Middleware to check if there's userId in cookie session and redirect to login page if not
 app.use((req, res, next) => {
@@ -128,6 +125,8 @@ app.get("/signers", (req, res) => {
             }
             getSigners()
                 .then((result) => {
+                    console.log(result);
+                    console.log(req.session.userId);
                     res.render("signers", {
                         layout: "main",
                         signers: result.rows,
