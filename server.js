@@ -13,6 +13,7 @@ const {
     deleteSignature,
     deleteProfile,
 } = require("./db");
+
 let cookieSecret;
 if (process.env.COOKIE_SECRET) {
     cookieSecret = process.env.COOKIE_SECRET;
@@ -25,6 +26,8 @@ const { hash, compare } = require("./utils/bcrypt");
 // Require express
 const express = require("express");
 const app = express();
+module.exports.app = app;
+
 // Require express-handlebars
 const hb = require("express-handlebars");
 app.engine("handlebars", hb());
@@ -77,9 +80,15 @@ app.use((req, res, next) => {
         "/petition",
         "/thanks",
         "/signers",
+        "/logout",
     ];
     if (urls.includes(req.url) && !req.session.userId) {
         return res.redirect("/login");
+    } else if (
+        (req.url === "/register" || req.url === "/login") &&
+        req.session.userId
+    ) {
+        return res.redirect("/petition");
     }
     next();
 });
@@ -92,81 +101,8 @@ app.get("/", (req, res) => {
     res.redirect("/register");
 });
 
-// Register
-
-app.get("/register", (req, res) => {
-    res.render("register", {
-        layout: "main",
-    });
-});
-
-app.post("/register", (req, res) => {
-    const {
-        "register-first": firstName,
-        "register-last": lastName,
-        "register-email": email,
-        "register-password": password,
-    } = req.body;
-    // Hash password
-    hash(password)
-        .then((passwordHash) => {
-            // Insert user into db
-            insertUser(firstName, lastName, email, passwordHash)
-                .then((result) => {
-                    const { id } = result.rows[0];
-                    req.session.userId = id;
-                    res.redirect("/profile");
-                })
-                .catch((err) => {
-                    console.log(err);
-                    res.render("register", {
-                        layout: "main",
-                        error: "Invalid user input...",
-                    });
-                });
-        })
-        .catch((err) => console.log(err));
-});
-
-// Log in
-
-app.get("/login", (req, res) => {
-    res.render("login", {
-        layout: "main",
-    });
-});
-
-app.post("/login", (req, res) => {
-    const { "login-email": email, "login-password": password } = req.body;
-    getUser(email)
-        .then((result) => {
-            if (result.rows.length === 0) {
-                res.render("login", {
-                    layout: "main",
-                    noUserError: "No user exists for this email...",
-                });
-                return;
-            }
-            compare(password, result.rows[0].password_hash).then((match) => {
-                if (match === true) {
-                    req.session.userId = result.rows[0].id;
-                    res.redirect("/petition");
-                } else {
-                    res.render("login", {
-                        layout: "main",
-                        wrongPassword: "Wrong password...",
-                    });
-                }
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-            res.render("login", {
-                layout: "main",
-                error: "Wrong user input...",
-            });
-        });
-});
+// Register, log in, log out
+require("./routers/auth");
 
 // Profile
 
@@ -359,11 +295,6 @@ app.get("/signers/:city", (req, res) => {
 });
 
 // Log out
-
-app.get("/logout", (req, res) => {
-    req.session = null;
-    res.redirect("/login");
-});
 
 app.listen(process.env.PORT || 8080, () =>
     console.log("Server listening on port 8080")
