@@ -67,7 +67,7 @@ app.use((req, res, next) => {
         "/logout",
     ];
     if (urls.includes(req.url) && !req.session.userId) {
-        return res.redirect("/login");
+        return res.redirect("/register");
     } else if (
         (req.url === "/register" || req.url === "/login") &&
         req.session.userId
@@ -99,6 +99,8 @@ require("./routers/thanks");
 // Signers
 app.use("/signers", signersRouter);
 
-app.listen(process.env.PORT || 8080, () =>
-    console.log("Server listening on port 8080")
-);
+if (require.main === module) {
+    app.listen(process.env.PORT || 8080, () =>
+        console.log("Server listening on port 8080")
+    );
+}
