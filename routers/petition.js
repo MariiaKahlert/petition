@@ -3,7 +3,6 @@ const { getSignature, signPetition } = require("../db");
 
 app.get("/petition", (req, res) => {
     getSignature(req.session.userId).then((result) => {
-        console.log(result);
         if (result.rows.length === 0) {
             res.render("petition", {
                 layout: "main",
