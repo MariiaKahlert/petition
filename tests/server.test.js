@@ -61,7 +61,7 @@ test("POST /petition sends a 302 status code and redirects to /thanks when a use
         });
 });
 
-test("POST /petition sends a 500 status code and contains error message", () => {
+test("POST /petition with bad input responses with error message", () => {
     cookieSession.mockSessionOnce({
         userId: 1,
     });
