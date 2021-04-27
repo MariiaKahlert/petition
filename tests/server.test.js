@@ -1,10 +1,12 @@
 const supertest = require("supertest");
 const { app } = require("../server");
 const cookieSession = require("cookie-session");
+const db = require("../db");
+jest.mock("../db");
 
 // 1.
 
-test("GET /petition sends a 302 status code and redirects to /register when there is no cookie session", () => {
+test("GET /petition sends a 302 status code and redirects to /register when a user is NOT logged in", () => {
     cookieSession.mockSessionOnce({});
     return supertest(app)
         .get("/petition")
@@ -15,41 +17,66 @@ test("GET /petition sends a 302 status code and redirects to /register when ther
 });
 
 // 2.
-
-test("GET /register and GET /login send a 302 status code and redirect to /petition when a user is logged in", () => {
-    cookieSession.mockSessionOnce({
-        userId: 1,
-    });
-    return supertest(app)
-        .get("/register" || "/login")
-        .then((response) => {
-            expect(response.statusCode).toBe(302);
-            expect(response.headers.location).toBe("/petition");
+for (let route of ["/register", "/login"]) {
+    test(`GET ${route} sends a 302 status code and redirects to /petition when a user is logged in`, () => {
+        cookieSession.mockSessionOnce({
+            userId: 1,
         });
-});
+        return supertest(app)
+            .get(route)
+            .then((response) => {
+                expect(response.statusCode).toBe(302);
+                expect(response.headers.location).toBe("/petition");
+            });
+    });
+}
 
 // 3.
 
-// test("GET /petition sends a 302 status code and redirects to /thanks when a user is logged in", () => {
-//     cookieSession.mockSessionOnce({
-//         userId: 1,
-//     });
-//     return supertest(app)
-//         .get("/petition")
-//         .then((response) => {
-//             expect(response.statusCode).toBe(302);
-//             expect(response.headers.location).toBe("/thanks");
-//         });
-// });
+test("GET /petition sends a 302 status code and redirects to /thanks when a user is logged in and has signed the petition", () => {
+    cookieSession.mockSessionOnce({
+        userId: 1,
+    });
+    db.getSignature.mockResolvedValue({
+        rows: [{ signature: "signature" }],
+    });
+    return supertest(app)
+        .get("/petition")
+        .then((response) => {
+            expect(response.statusCode).toBe(302);
+            expect(response.headers.location).toBe("/thanks");
+        });
+});
 
-// test("POST /petition sends a 302 status code and redirects to /thanks when a user is logged in", () => {
-//     cookieSession.mockSessionOnce({
-//         userId: 1,
-//     });
-//     return supertest(app)
-//         .post("/petition")
-//         .then((response) => {
-//             expect(response.statusCode).toBe(302);
-//             expect(response.headers.location).toBe("/thanks");
-//         });
-// });
+test("POST /petition sends a 302 status code and redirects to /thanks when a user is logged in and has signed the petition", () => {
+    cookieSession.mockSessionOnce({
+        userId: 1,
+    });
+    db.signPetition.mockResolvedValue({
+        rows: [],
+    });
+    return supertest(app)
+        .post("/petition")
+        .then((response) => {
+            expect(response.statusCode).toBe(302);
+            expect(response.headers.location).toBe("/thanks");
+        });
+});
+
+// 4.
+for (let route of ["/thanks", "/signers"]) {
+    test(`GET ${route} sends a 302 status code and redirects to /petition when a user is logged in and has NOT signed the petition`, () => {
+        cookieSession.mockSessionOnce({
+            userId: 1,
+        });
+        db.getSignature.mockResolvedValue({
+            rows: [],
+        });
+        return supertest(app)
+            .get(route)
+            .then((response) => {
+                expect(response.statusCode).toBe(302);
+                expect(response.headers.location).toBe("/petition");
+            });
+    });
+}
