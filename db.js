@@ -99,6 +99,7 @@ module.exports.getSigners = () => {
             SELECT first_name, last_name, age, city, url FROM signatures
             JOIN users ON signatures.user_id = users.id
             LEFT JOIN user_profiles ON user_profiles.user_id = users.id
+            ORDER BY signatures.created_at DESC;
     
         `
     );
@@ -111,6 +112,7 @@ module.exports.getSignersByCity = (city) => {
             JOIN users ON signatures.user_id = users.id
             LEFT JOIN user_profiles ON user_profiles.user_id = users.id
             WHERE LOWER(city) = LOWER($1)
+            ORDER BY signatures.created_at DESC;
         `,
         [city]
     );
