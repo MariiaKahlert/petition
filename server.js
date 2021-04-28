@@ -52,8 +52,7 @@ app.use((req, res, next) => {
 });
 
 // 5. Serve static files from public folder
-app.use(express.static("public"));
-// {maxAge: 1000 * 60 * 60 * 24 * 14}
+app.use(express.static("public", { maxAge: 1000 * 60 * 60 * 24 }));
 
 // 6. Middleware to check if there's userId in cookie session
 app.use((req, res, next) => {
