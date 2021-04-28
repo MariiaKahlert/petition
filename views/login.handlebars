@@ -1,5 +1,5 @@
 {{#>register-login}}
-<div class="flex flex-column justify-center align-center login-form-container">
+<div class="flex flex-column justify-center align-center" style="width: 100%; height: 100%">
     {{#if error}}
         <p class="error">{{error}}</p>
     {{/if}}
@@ -9,7 +9,7 @@
     {{#if wrongPassword}}
         <p class="error">{{wrongPassword}}</p>
     {{/if}}
-    <form method="POST" autocomplete="off">
+    <form method="POST" autocomplete="off" style="margin-top: 0">
         <div class="flex flex-column">
             <label for="login-email">Email</label>
             <input type="email" name="login-email" id="login-email" required>

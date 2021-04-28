@@ -18,20 +18,8 @@ h3 {
     text-align: center;
 }
 
-.facts-container h3 {
-    max-width: 325px;
-}
-
-.facts-list {
-    width: 80%;
-}
-
 .facts-list li {
     margin-bottom: 15px;
-}
-
-.facts-container a {
-    color: #a44a3f;
 }
 
 .petition-container {
@@ -40,24 +28,4 @@ h3 {
     height: 60%;
     width: 40%;
     max-width: 400px;
-}
-
-.petition-container h2 {
-    text-align: center;
-}
-
-.inputs {
-    width: 80%;
-}
-
-.input-container {
-    margin-bottom: 10px;
-}
-
-.canvas-container p {
-    font-size: 20px;
-}
-
-canvas {
-    border: 1px dotted;
 }

@@ -1,17 +1,10 @@
-.main-register-login-container {
-    height: 100vh;
-}
-
 .card-container {
-    width: 90vw;
-    height: 80vh;
+    width: 90%;
+    height: 80%;
+    max-width: 1000px;
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 4px 12px 0 rgb(0 0 0 / 35%);
-}
-
-.img-container {
-    width: 40%;
 }
 
 .img-container img {
@@ -36,21 +29,9 @@
     text-transform: uppercase;
 }
 
-.register-login-container h2 {
-    text-transform: uppercase;
-}
-
 .register-login-container p {
     width: 70%;
     max-width: 300px;
     margin-top: 0;
     text-align: center;
-}
-
-.register-button-container {
-    margin-top: 15px;
-}
-
-#register-button {
-    margin-top: 0;
 }

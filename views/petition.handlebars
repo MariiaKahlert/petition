@@ -3,8 +3,8 @@
     <div class="flex align-center justify-evenly" style="height: 85%; width: 100%">
         <div class="flex flex-column align-center justify-evenly text-carmine opacity-bg-goldenrod facts-container">
                 <h2>Why is disaggregating data by sex so important?</h2>
-                <h3>The lack of sex-disaggregated data affects our ability to give women sound medical advice. Here are some facts:</h3>
-                <div class="facts-list">
+                <h3 style="max-width: 325px">The lack of sex-disaggregated data affects our ability to give women sound medical advice. Here are some facts:</h3>
+                <div class="facts-list" style="width: 80%">
                     <ul>
                         <li>Autoimmune diseases affect about 8% of the population, but women are three times more likely to develop one, making up about 80% of those affected.</li>
                         <li>Responses to vaccines are sex-specific: women develop higher antibody response and have more frequent and severe adverse reactions to vaccines.</li>
@@ -13,10 +13,10 @@
                         <li>The female gender is accosiated with an increased risk of acute complications during primary pacemaker implantation. In 2013, a supposedly revolutionary artificial heart was developed that was too big for women.</li>
                     </ul>
                 </div>
-                <p><em>Source: <a target="_blank" href="https://carolinecriadoperez.com/book/invisible-women/">Invisible Women, Caroline Criado Perez</a></em></p>
+                <p><em>Source: <a target="_blank" href="https://carolinecriadoperez.com/book/invisible-women/" style="color: #a44a3f">Invisible Women, Caroline Criado Perez</a></em></p>
         </div>
         <div class="flex flex-column align-center justify-center opacity-bg-carmine petition-container"> 
-            <h2>Sign the petition</h2>
+            <h2 style="text-align: center">Sign the petition</h2>
             <form method="POST" autocomplete="off">
                 <div class="flex flex-column align-center justify-evenly petition-form-container">
                     {{#if error}}
@@ -24,12 +24,11 @@
                     {{/if}}
                     <input type="hidden" name="signature" id="signature" required>
                     <div class="canvas-container">
-                        <p><em>Sign here</em></p>
-                        <canvas height="50px" width="300px"></canvas>
+                        <p style="font-size: 20px"><em>Sign here</em></p>
+                        <canvas height="50px" width="300px" style="border: 1px dotted"></canvas>
                     </div>
                     <button type="submit">Submit</button>
                 </div>
-                {{!-- Prevent CSRF --}}
                 <input type="hidden" name="_csrf" value="{{csrfToken}}">
             </form>
         </div>
