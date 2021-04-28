@@ -30,12 +30,7 @@ router.post("/", (req, res) => {
     ) {
         userUrl = `http://${userUrl}`;
     }
-    createProfile(
-        userId,
-        age.length !== 0 ? age : null,
-        city.length !== 0 ? city : null,
-        userUrl.length !== 0 ? userUrl : null
-    )
+    createProfile(userId, age || null, city || null, userUrl || null)
         .then(() => {
             res.redirect("/petition");
         })
@@ -83,7 +78,12 @@ router.post("/edit", (req, res) => {
             Promise.all([
                 updateUser(firstName, lastName, email, userId),
                 updateUserPassword(passwordHash, userId),
-                upsertUserProfile(age, city, url, userId),
+                upsertUserProfile(
+                    age || null,
+                    city || null,
+                    url || null,
+                    userId
+                ),
             ])
                 .then(() => res.redirect("/thanks"))
                 .catch((err) => console.log(err));
@@ -91,7 +91,7 @@ router.post("/edit", (req, res) => {
     } else {
         Promise.all([
             updateUser(firstName, lastName, email, userId),
-            upsertUserProfile(age, city, url, userId),
+            upsertUserProfile(age || null, city || null, url || null, userId),
         ])
             .then(() => res.redirect("/thanks"))
             .catch((err) => console.log(err));
